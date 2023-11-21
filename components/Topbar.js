@@ -17,7 +17,7 @@ const height = Dimensions.get("window").height;
 
 const isweb = Platform.OS === "web";
 
-const Topbar = () => {
+const Topbar = ({ navigation }) => {
   return (
     <View>
       <View style={styles.topbar}>
@@ -37,18 +37,21 @@ const Topbar = () => {
         <View style={styles.cartcont}>
           <TouchableOpacity>
             <View>
-              <Feather name="shopping-cart" size={24} color="black" />
+              <Feather name="shopping-cart" size={24} color="#393F42" />
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
             <View>
-              <FontAwesome5 name="bell" size={24} color="black" />
+              <FontAwesome5 name="bell" size={24} color="#393F42" />
             </View>
           </TouchableOpacity>
         </View>
       </View>
       <View style={styles.searchbar_container}>
-        <View style={isweb ? web.searchbar : styles.searchbar}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Settings")}
+          style={isweb ? web.searchbar : styles.searchbar}
+        >
           <View style={{ marginStart: 17 }}>
             <Feather
               name="search"
@@ -67,7 +70,7 @@ const Topbar = () => {
               Search here ...
             </Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
   searchbar: {
     height: verticalScale(40),
     borderWidth: 2,
-    borderColor: '#F0F2F1',
+    borderColor: "#F0F2F1",
     backgroundColor: "red",
     backgroundColor: "#ffff",
     width: "91%",

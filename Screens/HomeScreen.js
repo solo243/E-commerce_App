@@ -28,18 +28,8 @@ export default function Homescreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1 }}>
-          <Topbar />
-          <View
-            style={{
-              width: "100%",
-              height: moderateScale(170),
-              // backgroundColor: "red",
-              alignContent: "center",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: moderateScale(20),
-            }}
-          >
+          <Topbar navigation={navigation} />
+          <View style={styles.banner_cont}>
             <FlatList
               data={[1, 2, 3, 4, 5]}
               horizontal
@@ -80,40 +70,13 @@ export default function Homescreen({ navigation }) {
             <Category />
             {/* //TODO: Recent Product */}
             <View>
-              <View
-                style={{
-                  flex: 1,
-                  // backgroundColor: "red",
-                  flexDirection: "row",
-                  height: moderateScale(32),
-                  paddingRight: 10,
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginTop: moderateScale(30),
-                  marginBottom: moderateScale(7),
-                }}
-              >
+              <View style={styles.recent_product_text}>
                 <Text style={{ color: "#393F42", fontSize: RFValue(14) }}>
                   Recent Product
                 </Text>
                 <TouchableOpacity
                   onPress={() => navigation.navigate("Search")}
-                  style={{
-                    height: "90%",
-                    // height: ,
-                    // borderColor: "grey",
-                    // borderWidth: 0.3,
-                    backgroundColor: "#ffff",
-                    borderWidth: 2,
-                    borderColor: "#F0F2F1",
-                    alignItems: "center",
-                    borderRadius: moderateScale(5),
-                    width: moderateScale(75),
-                    gap: moderateScale(12),
-                    justifyContent: "center",
-                    // flex: 1,
-                    flexDirection: "row",
-                  }}
+                  style={styles.filter_btn}
                 >
                   <Text style={{ color: "#393F42", fontSize: RFValue(10) }}>
                     Filters
@@ -126,7 +89,7 @@ export default function Homescreen({ navigation }) {
                 </TouchableOpacity>
               </View>
               {/* //TODO:  Product Card  */}
-              <Product_Card />
+              <Product_Card navigation={navigation} />
             </View>
           </View>
           <StatusBar style="dark" />
@@ -140,5 +103,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  banner_cont: {
+    width: "100%",
+    height: moderateScale(170),
+    // backgroundColor: "red",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: moderateScale(20),
+  },
+  recent_product_text: {
+    flex: 1,
+    // backgroundColor: "red",
+    flexDirection: "row",
+    height: moderateScale(32),
+    paddingRight: 10,
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: moderateScale(30),
+    marginBottom: moderateScale(7),
+  },
+  filter_btn: {
+    height: "90%",
+    // height: ,
+    // borderColor: "grey",
+    // borderWidth: 0.3,
+    backgroundColor: "#ffff",
+    borderWidth: 2,
+    borderColor: "#F0F2F1",
+    alignItems: "center",
+    borderRadius: moderateScale(5),
+    width: moderateScale(75),
+    gap: moderateScale(12),
+    justifyContent: "center",
+    // flex: 1,
+    flexDirection: "row",
   },
 });

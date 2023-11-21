@@ -12,7 +12,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import Products_List from "../data/Product_list";
 
 const width = Dimensions.get("window").width;
-const Product_Card = () => {
+const Product_Card = ({ navigation }) => {
   const Products = Products_List;
   return (
     <View
@@ -24,11 +24,14 @@ const Product_Card = () => {
         // backgroundColor: "green",
         justifyContent: "space-between",
         marginBottom: moderateScale(14),
-        // marginTop: moderateScale(10),
       }}
     >
       {Products.map((item) => (
-        <View key={item.id} style={styles.maincard_Container}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Detail", { data: item })}
+          key={item.id}
+          style={styles.maincard_Container}
+        >
           <View style={{ alignItems: "center" }}>
             <Image source={item.img} style={styles.card_img} />
           </View>
@@ -53,7 +56,7 @@ const Product_Card = () => {
           <TouchableOpacity style={styles.btn_cont}>
             <Text style={styles.btn_text}>Add to cart</Text>
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
     maxWidth: 250,
     margin: 10,
     marginBottom: 15,
-    elevation: 7,
+    elevation: 2,
     borderRadius: moderateScale(10),
   },
   card_img: {
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     height: moderateScale(37),
     alignSelf: "center",
     borderRadius: 5,
-    marginTop: moderateScale(9),
+    marginTop: moderateScale(13),
     justifyContent: "center",
     alignItems: "center",
   },

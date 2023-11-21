@@ -30,7 +30,11 @@ const Tab = createBottomTabNavigator();
 export const BottomTabNavi = () => {
   return (
     <Tab.Navigator
-      screenOptions={{tabBarStyle:{height: 60}, headerShown: false, tabBarShowLabel: false }}
+      screenOptions={{
+        tabBarStyle: { height: 60 },
+        headerShown: false,
+        tabBarShowLabel: false,
+      }}
     >
       <Tab.Screen
         name="Home"
@@ -89,7 +93,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="GG" component={BottomTabNavi} />
-        <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
