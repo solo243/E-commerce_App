@@ -15,17 +15,7 @@ const width = Dimensions.get("window").width;
 const Product_Card = ({ navigation }) => {
   const Products = Products_List;
   return (
-    <View
-      style={{
-        flexWrap: "wrap",
-        marginStart: moderateScale(-6),
-        flexDirection: "row",
-        alignItems: "center",
-        // backgroundColor: "green",
-        justifyContent: "space-between",
-        marginBottom: moderateScale(14),
-      }}
-    >
+    <View style={styles.main_outer_container}>
       {Products.map((item) => (
         <TouchableOpacity
           onPress={() => navigation.navigate("Detail", { data: item })}
@@ -42,16 +32,7 @@ const Product_Card = ({ navigation }) => {
             >
               {item.id}
             </Text>
-            <Text
-              style={{
-                fontSize: RFValue(13),
-                color: "#393F42",
-                fontWeight: "700",
-                marginTop: moderateScale(3),
-              }}
-            >
-              {item.price}
-            </Text>
+            <Text style={styles.pro_price}>{item.price}</Text>
           </View>
           <TouchableOpacity style={styles.btn_cont}>
             <Text style={styles.btn_text}>Add to cart</Text>
@@ -63,6 +44,15 @@ const Product_Card = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  main_outer_container: {
+    flexWrap: "wrap",
+    marginStart: moderateScale(-6),
+    flexDirection: "row",
+    alignItems: "center",
+    // backgroundColor: "green",
+    justifyContent: "space-between",
+    marginBottom: moderateScale(14),
+  },
   maincard_Container: {
     height: moderateScale(242),
     backgroundColor: "#FAFAFC",
@@ -100,6 +90,12 @@ const styles = StyleSheet.create({
     fontSize: RFValue(13),
     color: "white",
     fontWeight: "400",
+  },
+  pro_price: {
+    fontSize: RFValue(13),
+    color: "#393F42",
+    fontWeight: "700",
+    marginTop: moderateScale(3),
   },
 });
 export default Product_Card;
