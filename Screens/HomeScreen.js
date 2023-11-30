@@ -1,12 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import {
   FlatList,
+  Animated,
   SafeAreaView,
   StyleSheet,
   Text,
   View,
-  Image,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import "react-native-gesture-handler";
@@ -15,19 +14,30 @@ import { moderateScale } from "react-native-size-matters";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Ionicons } from "@expo/vector-icons";
 import Category from "../components/Category";
-
+import { LinearGradient } from "expo-linear-gradient";
 import Products_List from "../data/Product_list";
 import Product_Card from "../components/Product_Card";
+import * as Animatable from "react-native-animatable";
 
 export default function Homescreen({ navigation }) {
   // const
   const Products = Products_List;
-  // const NewCat = Cetogory;
   const og = [1, 2, 3, 4];
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{ flex: 1 }}>
+      <Animated.ScrollView
+        showsVerticalScrollIndicator={false}
+        onScroll={() => {
+          animation = "zoomInDown";
+        }}
+        animation="zoomInUp"
+      >
+        <LinearGradient
+          colors={["rgba(255,255,255,1)", "rgba(255,255,255,1)"]}
+          style={{ flex: 1 }}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 0.3 }}
+        >
           <Topbar navigation={navigation} />
           <View style={styles.banner_cont}>
             <FlatList
@@ -42,7 +52,8 @@ export default function Homescreen({ navigation }) {
                       marginLeft: moderateScale(15),
                     }}
                   >
-                    <Image
+                    <Animatable.Image
+                      animation="zoomInUp"
                       source={require("../assets/b11.png")}
                       style={{
                         height: moderateScale(160),
@@ -93,8 +104,8 @@ export default function Homescreen({ navigation }) {
             </View>
           </View>
           <StatusBar style="dark" />
-        </View>
-      </ScrollView>
+        </LinearGradient>
+      </Animated.ScrollView>
     </SafeAreaView>
   );
 }
@@ -126,9 +137,6 @@ const styles = StyleSheet.create({
   },
   filter_btn: {
     height: "90%",
-    // height: ,
-    // borderColor: "grey",
-    // borderWidth: 0.3,
     backgroundColor: "#ffff",
     borderWidth: 2,
     borderColor: "#F0F2F1",
