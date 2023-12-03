@@ -91,9 +91,39 @@ export const BottomTabNavi = () => {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="GG" component={BottomTabNavi} />
-        <Stack.Screen name="Detail" component={DetailScreen} />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          cardStyleInterpolator: ({ current: { progress } }) => ({
+            cardStyle: {
+              opacity: progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+              }),
+            },
+          }),
+        }}
+      >
+        <Stack.Screen
+          name="GG"
+          component={BottomTabNavi}
+          options={{
+            transitionSpec: {
+              open: { animation: "timing", config: { duration: 1 } },
+              close: { animation: "timing", config: { duration: 1 } },
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Detail"
+          component={DetailScreen}
+          options={{
+            transitionSpec: {
+              open: { animation: "timing", config: { duration: 1 } },
+              close: { animation: "timing", config: { duration: 1 } },
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
