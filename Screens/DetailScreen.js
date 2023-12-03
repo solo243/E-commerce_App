@@ -17,6 +17,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import Compney_Card from "../components/Compney_Card";
+import Animated from "react-native-reanimated";
+
 const height = Dimensions.get("window").height;
 const width = Dimensions.get("window").width;
 
@@ -46,7 +48,11 @@ const DetailScreen = ({ route }) => {
         />
 
         <View>
-          <Image source={data.img} style={styles.product_img} />
+          <Animated.Image
+            source={data.img}
+            style={styles.product_img}
+            sharedTransitionTag="sharedTag"
+          />
           {/* //Todo title and 90% container */}
           <View
             style={{

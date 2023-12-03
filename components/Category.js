@@ -3,6 +3,7 @@ import React from "react";
 import Cetogory from "../data/Category";
 import { moderateScale } from "react-native-size-matters";
 import { RFValue } from "react-native-responsive-fontsize";
+import { FlashList } from "@shopify/flash-list";
 
 const Category = () => {
   const NewCat = Cetogory;
@@ -21,6 +22,7 @@ const Category = () => {
                   height: moderateScale(50),
                   alignItems: "center",
                   justifyContent: "center",
+                  borderCurve: "continuous",
                   // backgroundColor: 'red'
                 }}
               >

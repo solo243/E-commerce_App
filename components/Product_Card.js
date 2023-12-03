@@ -5,40 +5,51 @@ import {
   Image,
   StyleSheet,
   Dimensions,
+  FlatList,
 } from "react-native";
 import React from "react";
 import { moderateScale, verticalScale } from "react-native-size-matters";
 import { RFValue } from "react-native-responsive-fontsize";
 import Products_List from "../data/Product_list";
+import { FlashList } from "@shopify/flash-list";
+import Animated from "react-native-reanimated";
 
 const width = Dimensions.get("window").width;
 const Product_Card = ({ navigation }) => {
   const Products = Products_List;
   return (
     <View style={styles.main_outer_container}>
-      {Products.map((item) => (
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Detail", { data: item })}
-          key={item.id}
-          style={styles.maincard_Container}
-        >
-          <View style={{ alignItems: "center" }}>
-            <Image source={item.img} style={styles.card_img} />
-          </View>
-          <View style={styles.title_price_cont}>
-            <Text
-              numberOfLines={1}
-              style={{ fontSize: RFValue(13), color: "#393F42" }}
+      <FlashList
+        numColumns={2}
+        estimatedItemSize={20}
+        data={Products}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Detail", { data: item })}
+            key={item.id}
+            style={styles.maincard_Container}
+          >
+            <Animated.View
+              style={{ alignItems: "center" }}
+              sharedTransitionTag="sharedTag"
             >
-              {item.id}
-            </Text>
-            <Text style={styles.pro_price}>{item.price}</Text>
-          </View>
-          <TouchableOpacity style={styles.btn_cont}>
-            <Text style={styles.btn_text}>Add to cart</Text>
+              <Image source={item.img} style={styles.card_img} />
+            </Animated.View>
+            <View style={styles.title_price_cont}>
+              <Text
+                numberOfLines={1}
+                style={{ fontSize: RFValue(13), color: "#393F42" }}
+              >
+                {item.id}
+              </Text>
+              <Text style={styles.pro_price}>{item.price}</Text>
+            </View>
+            <TouchableOpacity style={styles.btn_cont}>
+              <Text style={styles.btn_text}>Add to cart</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
-        </TouchableOpacity>
-      ))}
+        )}
+      />
     </View>
   );
 };
@@ -48,6 +59,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     marginStart: moderateScale(-6),
     flexDirection: "row",
+    display: "flex",
     alignItems: "center",
     // backgroundColor: "green",
     justifyContent: "space-between",
